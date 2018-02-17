@@ -1,0 +1,5 @@
+<h4>
+  Welcome {{me.username}}, {{me.role | role}}
+</h4>
+<client-list *ngIf="me.role === trainer"></client-list>
+<workout-list [role]="me.role" [user]="me"></workout-list>
