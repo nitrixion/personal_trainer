@@ -6,13 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { appRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent, LoginComponent } from './views/';
+import { HomeComponent, LoginComponent, WorkoutComponent } from './views/';
 import { UserService, UserResource, WorkoutService, WorkoutResource } from './services/';
 import { RolePipe } from './pipes';
 import { ClientListComponent, WorkoutListComponent } from './components/';
 import { MaterialModule } from './modules/material.module';
-import { WorkoutComponent } from './views/workout/workout/workout.component';
-
 
 @NgModule({
   declarations: [
