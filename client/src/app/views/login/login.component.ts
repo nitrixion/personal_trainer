@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     if(username && password) {
       this.error = false;
       this.userService.login(username, password).subscribe((user) => {
-        if(user) {
+        if(user && user["uid"]) {
           this.router.navigateByUrl('home');
         }
         else{

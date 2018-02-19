@@ -1,2 +1,2 @@
-export * from './workout.service';
-export * from './workout.resource';
+export { WorkoutService } from './workout.service';
+export { WorkoutResource } from './workout.resource';

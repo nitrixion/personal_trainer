@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Workout, Exercise, Movement, RepType, WeightType } from '../../model';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class WorkoutResource {
@@ -8,35 +10,48 @@ export class WorkoutResource {
     private exercises: Exercise[] = [];
     private movements: Movement[] = [];
 
-    constructor() { 
-        this.populateWorkouts();
+    constructor(private db: AngularFireDatabase,
+                private userService: UserService) { 
+        this.userService.me().subscribe((user) => {
+            this.populateWorkouts(user);
+        })
+        
     }
 
     public getWorkouts() {
         return this.workouts;
     }
+    public getExercises() {
+        return this.exercises;
+    }
 
-    populateWorkouts() {
+    public getMovements() {
+        return this.movements;
+    }
+
+    populateWorkouts(user) {
         var workout = new Workout();
         workout.id = this.generateId();
         workout.name = "Monday";
-        workout.exercises = [];
-        workout.exercises.push(this.squat());
-        workout.exercises.push(this.legPress());
-        workout.exercises.push(this.lunges());
-        workout.exercises.push(this.legCurl());
-        workout.owner = undefined;
+        workout.exerciseIds = [];
+        workout.exerciseIds.push(this.squat().id);
+        workout.exerciseIds.push(this.legPress().id);
+        workout.exerciseIds.push(this.lunges().id);
+        workout.exerciseIds.push(this.legCurl().id);
+        workout.exerciseIds.push(this.plank().id);
+        workout.owner = user.uid;
         workout.isPublic = true;
         this.workouts.push(workout);
 
         workout = new Workout();
         workout.id = this.generateId();
         workout.name = "Tuesday";
-        workout.exercises = [];
-        workout.exercises.push(this.benchPress());
-        workout.exercises.push(this.benchDBInclinePress());
-        workout.exercises.push(this.press());
-        workout.owner = undefined;
+        workout.exerciseIds = [];
+        workout.exerciseIds.push(this.benchPress().id);
+        workout.exerciseIds.push(this.benchDBInclinePress().id);
+        workout.exerciseIds.push(this.press().id);
+        workout.exerciseIds.push(this.plank().id);
+        workout.owner = user.uid;
         workout.isPublic = true;
         this.workouts.push(workout);
     }
@@ -51,7 +66,7 @@ export class WorkoutResource {
         move.id = this.generateId();
         move.name = name;
         exe.movements = [];
-        exe.movements.push(move);
+        exe.movements.push(move.name);
         exe.restSeconds = 0;
         exe.repType = RepType.Reps;
         exe.weightType = WeightType.RM;
@@ -99,6 +114,7 @@ export class WorkoutResource {
         exe.reps = 5;
         exe.sets = 6;
         exe.weight = 80;
+        exe.weightType = WeightType.RM;
         return exe;
     }
 
@@ -120,8 +136,16 @@ export class WorkoutResource {
         return exe;
     }
 
+    plank() {
+        var exe = this.makeExercise("Plank");
+        exe.reps = 60;
+        exe.repType = RepType.Seconds;
+        exe.sets = 5;
+        return exe;
+    }
+
     generateId() {
         //http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
-        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        return this.db.createPushId();
     }
 }

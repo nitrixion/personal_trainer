@@ -1,9 +1,10 @@
-import { User, Exercise } from ".";
+import { Exercise } from ".";
+import { User } from "@firebase/auth-types";
 
 export class Workout {
     public id: string;
     public name: string;
-    public exercises: Exercise[];
+    public exerciseIds: string[];
     public notes: string;
     public owner: User;
     public isPublic: boolean;

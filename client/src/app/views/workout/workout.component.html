@@ -1,3 +1,11 @@
-<p>
-  workout works!
-</p>
+<mat-list *ngIf="workout">
+  <h3 mat-subheader>{{workout.name}}</h3>
+  <div *ngIf="exercises">
+    <mat-list-item *ngFor="let exercise of exercises">
+      <h4 mat-line>{{getExerciseName(exercise)}} {{exercise.sets}}x{{exercise.reps}} <span *ngIf="exercise.repType === 1">Seconds</span><span *ngIf="exercise.weight">@ {{exercise.weight}}{{exercise.weightType > 9 ? '%' : ' lbs'}}</span></h4>
+      <div *ngIf="exercise.notes" mat-line>"{{exercise.notes}}"</div>
+    </mat-list-item>
+  </div>
+  <mat-divider></mat-divider>
+  <button mat-raised-button>Start</button>
+</mat-list>

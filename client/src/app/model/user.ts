@@ -2,6 +2,7 @@ export class User {
     public id: string;
     public username: string;
     public role: Role;
+    public uid: string;
 }
 
 export enum Role{

@@ -2,29 +2,32 @@ import { Injectable } from '@angular/core';
 import { User, Role } from '../../model';
 import { Observable } from 'rxjs';
 import { UserResource } from './user.resource'
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
 
-  private currentUser: User;
+  public currentUser: User = new User();
 
-  constructor(private mock: UserResource) { 
-    this.currentUser = this.mock.getUsers()[0];
+  constructor(public auth: AngularFireAuth) { 
   }
 
   public login(username:string, password:string) {
-    this.currentUser = null;
-    let user = this.mock.getUsers().filter((user) => { 
-      return user.username === username;
-    });
-    if(user.length > 0){ 
-      this.currentUser = user[0];
+    this.auth.auth.signInWithEmailAndPassword(username,password).then(() => {
+      //get profile
     }
-    return Observable.of(this.currentUser);
-  }
+  );
+  //   let user = this.mock.getUsers().filter((user) => { 
+  //     return user.username === username;
+  //   });
+  //   if(user.length > 0){ 
+  //     this.currentUser = user[0];
+  //   }
+     return this.auth.authState;
+   }
 
-  public me() {
-    return Observable.of(this.currentUser);
-  }
-
+   public me() {
+    return this.auth.authState;
+   }
 }

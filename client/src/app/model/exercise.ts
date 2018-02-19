@@ -1,6 +1,6 @@
 export class Exercise {
     public id: string;
-    public movements: Movement[];
+    public movements: string[];
     public restSeconds: number;
     public reps: number;
     public repsMin: number;
@@ -19,10 +19,10 @@ export class Movement {
 }
 
 export enum WeightType {
-    lbs,
-    kg,
-    RM, // percentage of 1 rep max
-    Heavy
+    lbs = 0,
+    kg = 1,
+    RM = 10, // percentage of 1 rep max
+    Heavy = 20
 }
 
 export enum RepType {

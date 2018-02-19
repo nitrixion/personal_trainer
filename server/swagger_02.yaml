@@ -805,12 +805,12 @@ definitions:
         format: int32
         description: Repitions per set
       repType:
-        $ref: '#/components/schemas/RepType'
+        $ref: '#/definitions/RepType'
       weight:
         type: integer
         format: int32
       weightType:
-        $ref: '#/components/schemas/WeightType'
+        $ref: '#/definitions/WeightType'
   Movement:
     type: object
     properties:
@@ -878,12 +878,12 @@ definitions:
         format: int32
         description: Repitions per set
       repType:
-        $ref: '#/components/schemas/RepType'
+        $ref: '#/definitions/RepType'
       weight:
         type: integer
         format: int32
       weightType:
-        $ref: '#/components/schemas/WeightType'
+        $ref: '#/definitions/WeightType'
   User:
     type: object
     properties:
@@ -905,38 +905,36 @@ definitions:
       roles:
         type: array
         items:
-          $ref: '#/components/schemas/Role'
+          $ref: '#/definitions/Role'
     xml:
       name: User
+  Role:
+    type: string
+    enum:
+      - trainer
+      - trainee
+      - admin
+  WeightType:
+    type: string
+    enum:
+      - lbs
+      - kg
+      - RM
+  RepType:
+    type: string
+    enum:
+      - Reps
+      - Sec
   ApiResponse:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      type:
-        type: string
-      message:
-        type: string
-components:
-  schemas:
-    Role:
+  type: object
+  properties:
+    code:
+      type: integer
+      format: int32
+    type:
       type: string
-      enum:
-        - trainer
-        - trainee
-        - admin
-    WeightType:
+    message:
       type: string
-      enum:
-        - lbs
-        - kg
-        - RM
-    RepType:
-      type: string
-      enum:
-        - Reps
-        - Sec
 externalDocs:
   description: Find out more about Swagger
   url: 'http://swagger.io'

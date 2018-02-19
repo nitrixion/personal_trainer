@@ -7,5 +7,5 @@ export class Program {
     public owner: User;
     public trainee: User;
     public notes: string;
-    public workouts: Workout[];
+    public workoutIds: string[];
 }

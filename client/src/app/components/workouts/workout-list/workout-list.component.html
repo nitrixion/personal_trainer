@@ -1,5 +1,6 @@
 <mat-list>
   <h3 mat-subheader>Workouts</h3>
+  <button (click)="initWorkouts()">Init</button>
   <mat-list-item *ngFor="let workout of workouts" (click)="showDetail(workout.id)">
     <mat-icon *ngIf="!workout.isPublic" mat-list-icon>o</mat-icon>
     <mat-icon *ngIf="workout.isPublic" mat-list-icon>o</mat-icon>

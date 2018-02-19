@@ -17,13 +17,18 @@ export class WorkoutListComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.workoutService.getAllWorkouts().subscribe((workouts) => {
+    this.workoutService.getAllWorkouts().subscribe((workouts: Workout[]) => {
+      //console.log(workouts);
       this.workouts = workouts;
     });
   }
 
   showDetail(workoutId) {
-    this.router.navigateByUrl(`workout/${workoutId}`);
+    this.router.navigateByUrl(`workouts/${workoutId}`);
+  }
+
+  initWorkouts() {
+    this.workoutService.init();
   }
 
 }

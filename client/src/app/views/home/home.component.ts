@@ -9,7 +9,7 @@ import { User, Role } from '../../model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private me: User = new User();
+  private me: any;//User = new User();
   // helpers
   private trainer = Role.trainer;
   private trainee = Role.trainee;
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userService.me().subscribe((user) => {
-      if(user) {
+      if(user && user["uid"]) {
         this.me = user;
       }
       else {
