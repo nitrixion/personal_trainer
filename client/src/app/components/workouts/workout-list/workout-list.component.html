@@ -1,12 +1,39 @@
-<mat-list>
-  <h3 mat-subheader>Workouts</h3>
-  <button (click)="initWorkouts()">Init</button>
-  <mat-list-item *ngFor="let workout of workouts" (click)="showDetail(workout.id)">
-    <mat-icon *ngIf="!workout.isPublic" mat-list-icon>o</mat-icon>
-    <mat-icon *ngIf="workout.isPublic" mat-list-icon>o</mat-icon>
-    <h4 mat-line>{{workout.name}}</h4>
-    <p mat-line> Public: {{workout.isPublic}} </p>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-</mat-list>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{workouts && workouts.length ? workouts.length : 0}} Workouts 
+      </mat-panel-title>
+      <mat-panel-description>
+        {{workouts && workouts.length > 0 ? "Show Workouts" : "Add Workouts"}} 
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!-- <mat-action-row> -->
+    <button mat-icon-button (click)="addNew()" class="add-button">
+      <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button (click)="copy()" class="add-button">
+      <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+    </button>
+    <workout-edit *ngIf="newWorkout" isNew="true" [workout]="newWorkout" (saved)="saveNewWorkout($event)"></workout-edit>
+    <!-- <button mat-mini-fab color="primary" (click)="save()" class="add-button">New</button> -->
+    <mat-divider class="list-spacer"></mat-divider>
+    <!-- </mat-action-row> -->
+    <div *ngIf="!workouts || workouts.length === 0">Add at least 1 workout to this program.</div>
+    <mat-accordion *ngIf="workouts && workouts.length > 0">
+      <mat-expansion-panel *ngFor="let workout of workouts">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              {{workout.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+              {{workout.notes}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <workout-edit [workout]="workout"></workout-edit>
+        <!-- <exercise-list></exercise-list> -->
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
 

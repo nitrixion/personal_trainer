@@ -1,0 +1,11 @@
+<form [formGroup]="formGroup">
+  <ng-template matStepLabel>{{program && program.name ? program.name : 'New Program'}}</ng-template>
+  <mat-form-field mat-line class="full-width">
+    <input matInput placeholder="Name"  formControlName="name">
+  </mat-form-field>
+  <mat-form-field class="full-width" >
+    <textarea matInput placeholder="Notes" maxlength="255"  formControlName="notes"></textarea>
+  </mat-form-field>
+  <mat-button-toggle value="workout.isPublic">Public</mat-button-toggle>
+  <button mat-raised-button (click)="save()">Save</button>
+</form> 

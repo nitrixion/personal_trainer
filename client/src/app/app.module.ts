@@ -11,14 +11,15 @@ import { environment } from '../environments/environment';
 
 import { appRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent, LoginComponent, WorkoutComponent } from './views/';
-import { UserService, UserResource, WorkoutService, WorkoutResource } from './services/';
+import { HomeComponent, LoginComponent, WorkoutComponent, ProgramComponent, ProgramEditComponent } from './views/';
+import { UserService, UserResource, WorkoutService, WorkoutLoader, ProgramService, ExerciseService } from './services/';
 import { RolePipe } from './pipes';
-import { ClientListComponent, WorkoutListComponent } from './components/';
+import { ClientListComponent, WorkoutListComponent, ProgramListComponent, ProgramDetailComponent, WorkoutEditComponent } from './components/';
 import { MaterialModule } from './modules/material.module';
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { ExerciseService } from './services/exercise/exercise.service';
+import { ExerciseListComponent } from './components/exercises/exercise-list/exercise-list.component';
+
 
 
 
@@ -30,7 +31,13 @@ import { ExerciseService } from './services/exercise/exercise.service';
     RolePipe,
     ClientListComponent,
     WorkoutListComponent,
-    WorkoutComponent
+    WorkoutComponent,
+    ProgramComponent,
+    ProgramListComponent,
+    ProgramDetailComponent,
+    ProgramEditComponent,
+    WorkoutEditComponent,
+    ExerciseListComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,14 @@ import { ExerciseService } from './services/exercise/exercise.service';
       //{ enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [UserService, UserResource, WorkoutService, WorkoutResource, ExerciseService, AngularFireDatabase],
+  providers: [
+    UserService, 
+    UserResource, 
+    WorkoutService, 
+    WorkoutLoader, 
+    ExerciseService,
+    ProgramService, 
+    AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

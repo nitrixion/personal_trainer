@@ -3,8 +3,9 @@ import { Workout, Exercise, Movement, RepType, WeightType } from '../../model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UserService } from '../user/user.service';
 
+/// Generates initial data for test purposes
 @Injectable()
-export class WorkoutResource {
+export class WorkoutLoader {
 
     private workouts: Workout[] = [];
     private exercises: Exercise[] = [];
@@ -12,9 +13,7 @@ export class WorkoutResource {
 
     constructor(private db: AngularFireDatabase,
                 private userService: UserService) { 
-        this.userService.me().subscribe((user) => {
-            this.populateWorkouts(user);
-        })
+        
         
     }
 
@@ -29,6 +28,12 @@ export class WorkoutResource {
         return this.movements;
     }
 
+    load() {
+        this.userService.me().then((user) => {
+            this.populateWorkouts(user);
+        });
+    }
+
     populateWorkouts(user) {
         var workout = new Workout();
         workout.id = this.generateId();
@@ -39,7 +44,7 @@ export class WorkoutResource {
         workout.exerciseIds.push(this.lunges().id);
         workout.exerciseIds.push(this.legCurl().id);
         workout.exerciseIds.push(this.plank().id);
-        workout.owner = user.uid;
+        workout.ownerId = user.id;
         workout.isPublic = true;
         this.workouts.push(workout);
 
@@ -51,7 +56,7 @@ export class WorkoutResource {
         workout.exerciseIds.push(this.benchDBInclinePress().id);
         workout.exerciseIds.push(this.press().id);
         workout.exerciseIds.push(this.plank().id);
-        workout.owner = user.uid;
+        workout.ownerId = user.id;
         workout.isPublic = true;
         this.workouts.push(workout);
     }

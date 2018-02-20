@@ -6,6 +6,8 @@ export class Workout {
     public name: string;
     public exerciseIds: string[];
     public notes: string;
-    public owner: User;
+    public ownerId: string;
     public isPublic: boolean;
 }
+
+

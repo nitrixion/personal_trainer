@@ -1,0 +1,7 @@
+
+.mat-button-toggle,.mat-button-toggle-standalone,.mat-button-toggle-checked{
+    background-color:white;
+}
+.mat-button-toggle-checked{
+    background-color: lightcoral;
+}

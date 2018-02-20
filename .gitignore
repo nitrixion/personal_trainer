@@ -1,2 +1,3 @@
 deploy/
 server/node_modules/
+client/functions/node_modules/

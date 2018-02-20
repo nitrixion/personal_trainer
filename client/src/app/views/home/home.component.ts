@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services';
+import { UserService, WorkoutService } from '../../services';
 import { Router } from '@angular/router';
 import { User, Role } from '../../model';
 
@@ -15,17 +15,27 @@ export class HomeComponent implements OnInit {
   private trainee = Role.trainee;
   
   constructor(private userService: UserService,
+    private workoutService: WorkoutService,
     private router: Router) { }
 
   ngOnInit() {
-    this.userService.me().subscribe((user) => {
-      if(user && user["uid"]) {
+    this.userService.me().then((user) => {
+      if(user && user.id) {
         this.me = user;
+        console.log(this.me);
       }
       else {
         this.router.navigateByUrl('/');
       }
     });
+  }
+
+  navigateTo(route) {
+    this.router.navigateByUrl(route);
+  }
+
+  init() {
+    this.workoutService.init();
   }
 
 }

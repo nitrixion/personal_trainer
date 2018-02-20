@@ -1,0 +1,55 @@
+<p>
+  {{edit ? 'Editting a' : 'Creating a new' }} Program
+</p>
+<mat-accordion>
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{program && program.name ? program.name : "New Program"}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{(program && program.start ? program.start : today) | date:short}} - {{(program && program.end ? program.end : today) | date:short}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="formGroup">
+      <ng-template matStepLabel>{{program && program.name ? program.name : 'New Program'}}</ng-template>
+      <mat-form-field mat-line class="full-width">
+        <input matInput placeholder="Name"  formControlName="name">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput [matDatepicker]="startPicker" placeholder="Start date"  formControlName="start">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="endPicker" placeholder="End date"  formControlName="end">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select placeholder="Client"  formControlName="traineeId">
+          <mat-option *ngFor="let user of clients" [value]="user.id">
+            {{user.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field class="full-width" >
+        <textarea matInput placeholder="Notes" maxlength="255"  formControlName="notes"></textarea>
+      </mat-form-field>
+    </form>
+    
+  </mat-expansion-panel>
+</mat-accordion>
+<workout-list *ngIf="this.edit" [workouts]="workouts" (workoutAdded)="saveNewWorkout($event)"></workout-list>
+<mat-action-row>
+  <button mat-raised-button (click)="save()">Save</button>
+</mat-action-row>
+<!-- <mat-action-row>
+  <button mat-raised-button (click)="save()">Save</button>
+</mat-action-row> -->
+
+

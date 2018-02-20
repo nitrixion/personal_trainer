@@ -1,31 +1,24 @@
-export class Exercise {
+import { RepType, WeightType } from "./enums";
+
+export abstract class ExerciseBase {
     public id: string;
-    public movements: string[];
-    public restSeconds: number;
     public reps: number;
-    public repsMin: number;
-    public repType: RepType;
     public sets: number;
     public weight: number;
-    public weightType: WeightType;
     public notes: string;
 }
 
-/// Bench Press
-/// Squat
-export class Movement {
-    public id: string;
-    public name: string;
-}
+// Exercise represents a structure set of movements
+export class Exercise extends ExerciseBase{
+    public movements: string[];
+    public restSeconds: number;
+    public repsMin: number;
+    public repType: RepType;
+    public weightType: WeightType;
 
-export enum WeightType {
-    lbs = 0,
-    kg = 1,
-    RM = 10, // percentage of 1 rep max
-    Heavy = 20
-}
-
-export enum RepType {
-    Reps,
-    Seconds
+    public getName() {
+        if(this.movements && this.movements.length > 0){
+            return this.movements.join(" SS ");
+        }
+    }
 }

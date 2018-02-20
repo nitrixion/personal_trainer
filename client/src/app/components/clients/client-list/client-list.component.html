@@ -1,3 +1,10 @@
-<p>
-  client-list works!
-</p>
+<mat-list>
+  <h3 mat-subheader>Clients</h3>
+  <div *ngIf="clients && clients.length">
+    <mat-list-item *ngFor="let client of clients" (click)="showDetail(workout.id)">
+      <h4 mat-line>{{client.username}}</h4>
+      <button mat-raised-button (click)="assign(client)">Take On Client</button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list>

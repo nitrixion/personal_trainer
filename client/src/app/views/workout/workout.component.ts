@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WorkoutService } from '../../services';
+import { WorkoutService, ExerciseService } from '../../services';
 import { Workout, Exercise } from '../../model';
-import { ExerciseService } from '../../services/exercise/exercise.service';
 
 @Component({
   selector: 'app-workout',
@@ -35,14 +34,14 @@ export class WorkoutComponent implements OnInit {
     let me = this;
     this.workout.exerciseIds.forEach((id) => {
       me.exerciseService.getExerciseById(id).subscribe((exercise: Exercise) => {
-        me.exercises.push(exercise);
-        console.log(me.exercises);
+        let exe = Object.assign(new Exercise(),exercise);
+        me.exercises.push(exe);
       });
     });
   }
 
   getExerciseName(exercise: Exercise) {
-    return exercise.movements.join(" SS ");
+    return exercise.getName();
   }
 
   ngOnDestroy() {

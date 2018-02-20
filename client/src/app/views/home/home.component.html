@@ -1,5 +1,15 @@
 <h4>
-  Welcome {{me ? me.email : ''}}
+  Welcome {{me ? me.username : ''}}
 </h4>
-<client-list ></client-list>
-<workout-list [user]="me"></workout-list>
+<div *ngIf="me && me.role == trainer">
+  <button mat-raised-button (click)="navigateTo('programs')">View Current Programs</button>
+  <button mat-raised-button (click)="navigateTo('programs/create')">Create Program</button>
+  <button mat-raised-button (click)="navigateTo('users/clients')">View Clients</button>
+  <button mat-raised-button (click)="init()">Init</button>
+  <!-- <client-list></client-list> -->
+</div>
+<div *ngIf="me && me.role == trainee">
+  <button mat-raised-button>Start Program</button>
+  <!-- <workout-list [user]="me"></workout-list> -->
+</div>
+
