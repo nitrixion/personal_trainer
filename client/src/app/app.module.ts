@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { appRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent, LoginComponent, WorkoutComponent, ProgramComponent, ProgramEditComponent } from './views/';
-import { UserService, UserResource, WorkoutService, WorkoutLoader, ProgramService, ExerciseService } from './services/';
+import { UserServiceFirebase, WorkoutService, WorkoutLoader, ProgramService, ExerciseService, UserService } from './services/';
 import { RolePipe } from './pipes';
 import { ClientListComponent, WorkoutListComponent, ProgramListComponent, ProgramDetailComponent, WorkoutEditComponent } from './components/';
 import { MaterialModule } from './modules/material.module';
@@ -55,8 +55,7 @@ import { ExerciseListComponent } from './components/exercises/exercise-list/exer
     )
   ],
   providers: [
-    UserService, 
-    UserResource, 
+    {provide: UserService, useClass: UserServiceFirebase}, 
     WorkoutService, 
     WorkoutLoader, 
     ExerciseService,

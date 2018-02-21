@@ -1,2 +1,3 @@
 export * from './user.service';
-export * from './user.resource';
+export * from './user.service.firebase';
+export * from './user.service.mock';

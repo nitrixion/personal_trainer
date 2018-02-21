@@ -14,7 +14,7 @@ export class ClientListComponent implements OnInit {
 
   ngOnInit() {
     this.clients = [];
-    this.userService.getUserByRole(Role.trainee).subscribe((clients) => {
+    this.userService.getClients().then((clients) => {
       for(let client of clients){
         this.clients.push(Object.assign(new User(), client));
       }

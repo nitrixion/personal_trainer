@@ -4,8 +4,9 @@
 <div *ngIf="me && me.role == trainer">
   <button mat-raised-button (click)="navigateTo('programs')">View Current Programs</button>
   <button mat-raised-button (click)="navigateTo('programs/create')">Create Program</button>
-  <button mat-raised-button (click)="navigateTo('users/clients')">View Clients</button>
-  <button mat-raised-button (click)="init()">Init</button>
+  <button mat-raised-button (click)="navigateTo('clients')">View Clients</button>
+  <!-- DANGER - User this to repopulate the DB-->
+  <!-- <button mat-raised-button (click)="init()">Init</button> -->
   <!-- <client-list></client-list> -->
 </div>
 <div *ngIf="me && me.role == trainee">

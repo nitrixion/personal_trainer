@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
-import { UserService } from '../user/user.service'
 
 @Injectable()
 export class MovementService {

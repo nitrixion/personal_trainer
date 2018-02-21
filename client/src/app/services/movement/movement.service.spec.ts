@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ExerciseService } from './exercise.service';
+import { MovementService } from './movement.service';
 
-describe('ExerciseService', () => {
+describe('MovementService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ExerciseService]
+      providers: [MovementService]
     });
   });
 
-  it('should be created', inject([ExerciseService], (service: ExerciseService) => {
+  it('should be created', inject([MovementService], (service: MovementService) => {
     expect(service).toBeTruthy();
   }));
 });

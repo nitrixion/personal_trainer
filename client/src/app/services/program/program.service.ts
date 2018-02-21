@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
-import { UserService } from '../user/user.service'
 import { Program } from '../../model';
 
 @Injectable()
@@ -27,6 +26,7 @@ export class ProgramService {
     this.itemRef = this.db.object(`programs/${program.id}`);
     program.startString = program.start.toDateString();
     program.endString = program.end.toDateString();
+    // add owner id
     let promise = new Promise<string>((resolve,reject) => {
       this.itemRef.set(program).then(() => {
         resolve(program.id);
