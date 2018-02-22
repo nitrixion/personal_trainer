@@ -1,5 +1,7 @@
 import { AppPage } from './app.po';
 
+// NOT YET IMPLEMENTED
+
 describe('workout-manager-client App', () => {
   let page: AppPage;
 
