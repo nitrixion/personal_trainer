@@ -61,4 +61,10 @@ describe('ProgramEditComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get clients for the logged in user', () => {
+    spyOn(userService, 'getClients').and.callThrough();
+    component.onRefresh();
+    expect(userService.getClients).toHaveBeenCalled();
+  });
 });

@@ -9,7 +9,7 @@ import { ProgramService, WorkoutService } from '../../../services';
   styleUrls: ['./program-base.component.css']
 })
 export abstract class ProgramBaseComponent implements OnInit {
-  protected programId: string;
+  public programId: string;
   public program: Program;
   public workouts: Workout[];
   constructor(protected route: ActivatedRoute,

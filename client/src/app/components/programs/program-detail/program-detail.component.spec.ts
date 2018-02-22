@@ -10,7 +10,8 @@ describe('ProgramDetailComponent', () => {
   let injector: TestBed;
   let component: ProgramDetailComponent;
   let fixture: ComponentFixture<ProgramDetailComponent>;
-  let service: WorkoutService;
+  let workoutService: WorkoutService;
+  let programService: ProgramService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,7 +32,8 @@ describe('ProgramDetailComponent', () => {
 
   beforeEach(() => {
     injector = getTestBed();
-    service = injector.get(WorkoutService);
+    workoutService = injector.get(WorkoutService);
+    programService = injector.get(ProgramService);
     fixture = TestBed.createComponent(ProgramDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -39,5 +41,19 @@ describe('ProgramDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call refresh on init', () => {
+    spyOn(component, 'refresh').and.callThrough();
+    component.ngOnInit();
+    expect(component.refresh).toHaveBeenCalled();
+  });
+
+  it('should get a program on refresh', () => {
+    spyOn(programService, 'getById').and.callThrough();
+    component.programId = "uid-123";
+    component.refresh();
+    expect(programService.getById).toHaveBeenCalled();
+    //expect(component.program).toBeTruthy();
   });
 });

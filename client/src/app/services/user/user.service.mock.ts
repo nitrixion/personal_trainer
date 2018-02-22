@@ -10,8 +10,8 @@ export class UserServiceMock extends UserService {
     constructor() {
         super();
         this.currentUser = new User();
-        this.currentUser.id = "";
-        this.currentUser.username = "";
+        this.currentUser.id = "uid-123";
+        this.currentUser.username = "uname";
         this.currentUser.role = Role.trainer;
         this.currentUser.userIds = ["id1", "id2"];
 

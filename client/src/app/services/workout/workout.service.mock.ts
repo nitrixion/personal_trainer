@@ -21,12 +21,12 @@ export class WorkoutServiceMock extends WorkoutService {
     }
     save(workout: Workout): Promise<string> {
         return new Promise<string>((resolve,reject) => {
-            resolve("uid-123");
+            resolve(workout.id);
         });
     }
     update(workout: Workout): Promise<string> {
         return new Promise<string>((resolve,reject) => {
-            resolve("uid-123");
+            resolve(workout.id);
         });
     }
 }

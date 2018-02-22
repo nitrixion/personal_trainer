@@ -13,6 +13,7 @@ describe('LoginComponent', () => {
   let builder: FormBuilder;
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,6 +36,7 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     injector = getTestBed();
     builder = injector.get(FormBuilder);
+    userService = injector.get(UserService);
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -42,5 +44,25 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  
+  it('should logout on init', () => {
+    spyOn(userService, 'logout').and.callThrough();
+    component.ngOnInit();
+    expect(userService.logout).toHaveBeenCalled();
+  });
+
+  it('should login with username and password', () => {
+    spyOn(userService, 'login').and.callThrough();
+    component.formOptions = {
+      username: {
+        value: "username"
+      },
+      password: {
+        value: "password"
+      }
+    }
+    component.login();
+    expect(userService.login).toHaveBeenCalled();
   });
 });
