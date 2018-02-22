@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 
 import { ProgramDetailComponent } from './program-detail.component';
-import { WorkoutService, UserService, UserServiceMock } from '../../../services';
+import { WorkoutService, UserService, UserServiceMock, ProgramService, ProgramServiceMock, WorkoutServiceMock } from '../../../services';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 describe('ProgramDetailComponent', () => {
@@ -14,8 +16,14 @@ describe('ProgramDetailComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProgramDetailComponent ],
       providers: [
-        WorkoutService,
         {provide: UserService, useClass:UserServiceMock},
+        {provide: ProgramService, useClass:ProgramServiceMock},
+        {provide: WorkoutService, useClass:WorkoutServiceMock},
+        { provide: ActivatedRoute,
+          useValue: {
+            params: Observable.of({id: "uid-123"})
+          }
+        }
       ]
     })
     .compileComponents();

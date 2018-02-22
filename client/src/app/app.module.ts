@@ -12,16 +12,13 @@ import { environment } from '../environments/environment';
 import { appRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent, LoginComponent, WorkoutComponent, ProgramComponent, ProgramEditComponent } from './views/';
-import { UserServiceFirebase, WorkoutService, WorkoutLoader, ProgramService, ExerciseService, UserService } from './services/';
+import { UserServiceFirebase, WorkoutService, WorkoutLoader, ProgramService, ExerciseService, UserService, WorkoutServiceFirebase, ProgramServiceFirebase, ExerciseServiceFirebase, MovementService, MovementServiceFirebase } from './services/';
 import { RolePipe } from './pipes';
 import { ClientListComponent, WorkoutListComponent, ProgramListComponent, ProgramDetailComponent, WorkoutEditComponent } from './components/';
 import { MaterialModule } from './modules/material.module';
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ExerciseListComponent } from './components/exercises/exercise-list/exercise-list.component';
-
-
-
 
 @NgModule({
   declarations: [
@@ -45,9 +42,9 @@ import { ExerciseListComponent } from './components/exercises/exercise-list/exer
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpModule, 
+    HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, 
+    AngularFireAuthModule,
     AngularFirestoreModule,
     RouterModule.forRoot(
       appRoutes,
@@ -55,11 +52,12 @@ import { ExerciseListComponent } from './components/exercises/exercise-list/exer
     )
   ],
   providers: [
-    {provide: UserService, useClass: UserServiceFirebase}, 
-    WorkoutService, 
-    WorkoutLoader, 
-    ExerciseService,
-    ProgramService, 
+    { provide: UserService, useClass: UserServiceFirebase },
+    { provide: WorkoutService, useClass: WorkoutServiceFirebase },
+    WorkoutLoader,
+    { provide: MovementService, useClass: MovementServiceFirebase },
+    { provide: ExerciseService, useClass: ExerciseServiceFirebase },
+    { provide: ProgramService, useClass: ProgramServiceFirebase },
     AngularFireDatabase],
   bootstrap: [AppComponent]
 })

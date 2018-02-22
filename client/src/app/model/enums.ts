@@ -6,6 +6,6 @@ export enum WeightType {
 }
 
 export enum RepType {
-    Reps,
+    Reps = 0,
     Seconds
 }

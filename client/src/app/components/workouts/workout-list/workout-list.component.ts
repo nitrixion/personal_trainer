@@ -23,10 +23,6 @@ export class WorkoutListComponent implements OnInit {
     this.router.navigateByUrl(`workouts/${workoutId}`);
   }
 
-  initWorkouts() {
-    this.workoutService.init();
-  }
-
   saveNewWorkout(workoutId) {
     this.newWorkout = undefined;
     // this.workoutService.save(this.newWorkout).then((id) => {

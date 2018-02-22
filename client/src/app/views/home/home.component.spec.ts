@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { WorkoutService, WorkoutServiceMock, UserService, UserServiceMock } from '../../services';
+import { Router } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +10,16 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ HomeComponent ],
+      providers: [
+        {provide: UserService, useClass:UserServiceMock},
+        {provide: WorkoutService, useClass:WorkoutServiceMock},
+        {provide: Router,
+          useValue: {
+            navigateByUrl: function() {}
+          }
+         }
+      ]
     })
     .compileComponents();
   }));

@@ -1,21 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
+import { BaseService } from '../base.service';
+import { Movement } from '../../model';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class MovementService {
-  itemRef: AngularFireObject<any>;
-  //user: any;
-  //item: FirebaseObjectObservable<any>;
-  constructor(private db: AngularFireDatabase) { }
-
-  public getMovementById(id) {
-    return this.db.object(`movements/${id}`).valueChanges();
-  }
-
-  public getAllMovements() {
-    return this.db.object(`movements`).valueChanges();
-  }
-
-  // search movements by name
-
+export abstract class MovementService extends BaseService<Movement> {
+  //TODO: search movements by name
 }

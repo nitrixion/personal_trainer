@@ -29,14 +29,14 @@ export abstract class ProgramBaseComponent implements OnInit {
       this.onRefresh();
       return;
     }
-    this.programService.getProgramById(this.programId).subscribe((program) => {
+    this.programService.getById(this.programId).subscribe((program) => {
       if(program){
         this.program = Object.assign(new Program, program);
         this.program.start = new Date(this.program.startString);
         this.program.end = new Date(this.program.endString);
         if(this.program.workoutIds) {
           this.program.workoutIds.forEach((id) => {
-            this.workoutService.getWorkoutById(id).subscribe((workout) => {
+            this.workoutService.getById(id).subscribe((workout) => {
               this.addWorkout(workout);
             })
           });

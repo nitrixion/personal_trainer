@@ -46,23 +46,3 @@ export class UserServiceMock extends UserService {
         // no op
     }
 }
-
-export class AngularFireAuthMock {
-    public signInWithEmailAndPassword(username,password) {
-        return new Promise<any>((resolve,reject) => {
-            resolve({uid:"uid"});
-        });
-    }
-}
-
-export class AngularFireDatabaseMock {
-    public object(query){
-        return new AngularFireObjectMock();
-    }
-}
-
-export class AngularFireObjectMock {
-    public valueChanges() {
-        return of({});
-    }
-}

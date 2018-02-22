@@ -1,20 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Workout, Exercise, Movement, RepType, WeightType } from '../../model';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { UserService } from '../user/user.service';
+import { Observable } from 'rxjs';
 
 /// Generates initial data for test purposes
 @Injectable()
 export class WorkoutLoader {
-
+    itemRef: AngularFireObject<any>;
     private workouts: Workout[] = [];
     private exercises: Exercise[] = [];
     private movements: Movement[] = [];
 
     constructor(private db: AngularFireDatabase,
                 private userService: UserService) { 
+    }
+
+    private populate() {
+        let workouts = this.getWorkouts();
         
+        workouts.forEach((wo) => {
+            this.itemRef = this.db.object(`workouts/${wo.id}`);
+            this.itemRef.set(wo);
+        });
+
+        let exercises = this.getExercises();
+        exercises.forEach((exe) => {
+            this.itemRef = this.db.object(`exercises/${exe.id}`);
+            this.itemRef.set(exe);
+        });
+
+        let movements = this.getMovements();
+        movements.forEach((move) => {
+            this.itemRef = this.db.object(`movements/${move.id}`);
+            this.itemRef.set(move);
+        });
         
+
+        return Observable.of(workouts); 
     }
 
     public getWorkouts() {

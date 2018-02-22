@@ -9,7 +9,7 @@ import { User, Role } from '../../model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private me: any;//User = new User();
+  private me: User;
   // helpers
   private trainer = Role.trainer;
   private trainee = Role.trainee;
@@ -32,10 +32,6 @@ export class HomeComponent implements OnInit {
 
   navigateTo(route) {
     this.router.navigateByUrl(route);
-  }
-
-  init() {
-    this.workoutService.init();
   }
 
 }

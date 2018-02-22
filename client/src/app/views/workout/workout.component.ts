@@ -23,7 +23,7 @@ export class WorkoutComponent implements OnInit {
     let me = this;
     this.sub = this.route.params.subscribe(params => {
       me.id = params['workoutId'];
-      me.workoutService.getWorkoutById(me.id).subscribe((workout: Workout) => {
+      me.workoutService.getById(me.id).subscribe((workout: Workout) => {
         me.workout = workout;
         me.getExercises();
       })
@@ -33,7 +33,7 @@ export class WorkoutComponent implements OnInit {
   getExercises() {
     let me = this;
     this.workout.exerciseIds.forEach((id) => {
-      me.exerciseService.getExerciseById(id).subscribe((exercise: Exercise) => {
+      me.exerciseService.getById(id).subscribe((exercise: Exercise) => {
         let exe = Object.assign(new Exercise(),exercise);
         me.exercises.push(exe);
       });

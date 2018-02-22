@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProgramComponent } from './program.component';
+import { ProgramListComponent } from '../../components';
 
 describe('ProgramComponent', () => {
   let component: ProgramComponent;
@@ -8,7 +9,7 @@ describe('ProgramComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramComponent ]
+      declarations: [ ProgramComponent, ProgramListComponent ]
     })
     .compileComponents();
   }));

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User, Role } from '../../model';
-import { Observable, Subject } from 'rxjs';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export abstract class UserService {
